@@ -5,20 +5,18 @@ __lua__
 
 -- sprite reference:
 -- 1-3: player sprites (idle, jump, fall)
--- 16-18: fire animation sprites
--- 32-34: enemy sprites (scared, angry, fire-immune)
+-- 19-21: fire animation sprites (shifted from 16-18)
+-- 35-37: enemy sprites (shifted from 32-34)
 -- map tiles:
--- 1-3: stone blocks (non-flammable)
--- 4-7: wooden blocks (flammable)
--- 8-10: metal blocks (non-flammable)
--- 11-12: water tiles
--- 13-14: explosive barrels
--- 15: goal/exit tile
--- 16-19: additional platform tiles (non-flammable)
--- 20-23: additional flammable tiles
--- 24-26: burnt/charred tiles
--- 27-28: additional water tiles
--- 29-30: additional explosive tiles
+-- 4-6: stone blocks (non-flammable)
+-- 7-10: wooden blocks (flammable)
+-- 11-13: metal blocks (non-flammable)
+-- 14-15: water tiles
+-- 16-17: explosive barrels
+-- 18: goal/exit tile
+-- 22-25: additional platform tiles (non-flammable)
+-- 26-29: additional flammable tiles
+-- 30-32: burnt/charred tiles
 
 -- game states
 gs_menu = 0
@@ -58,12 +56,12 @@ fire_timer = 0
 fire_spread_time = 30
 
 -- map variables
-flammable_tiles = {4, 5, 6, 7, 20, 21, 22, 23}
-non_flammable_tiles = {1, 2, 3, 8, 9, 10, 16, 17, 18, 19}
-water_tiles = {11, 12, 27, 28}
-explosive_tiles = {13, 14, 29, 30}
-burnt_tiles = {24, 25, 26}
-goal_tile = 15
+flammable_tiles = {7, 8, 9, 10, 26, 27, 28, 29}
+non_flammable_tiles = {4, 5, 6, 11, 12, 13, 22, 23, 24, 25}
+water_tiles = {14, 15}
+explosive_tiles = {16, 17}
+burnt_tiles = {30, 31, 32}
+goal_tile = 18
 
 -- camera
 cam = {
@@ -86,8 +84,207 @@ enemies = {}
 explosions = {}
 
 function _init()
+  load_sprites()
+  load_maps()
   init_level(level)
   music(0)
+end
+
+function load_sprites()
+  -- player idle sprite (1)
+  spr_data(1, "0077770000777700077777700777777007700770077007700770077000700700")
+  -- player jump sprite (2)
+  spr_data(2, "0077770000777700077777700777777007700770077007700077770000077000")
+  -- player fall sprite (3)
+  spr_data(3, "0077770000777700077777700777777007700770077007700077770000700700")
+  
+  -- stone blocks (4-6)
+  spr_data(4, "7777777777777777777777777777777777777777777777777777777777777777")
+  spr_data(5, "7777777775557777757575777555577775757577755557777777777777777777")
+  spr_data(6, "7777777777777777777766777776777777767777776677777777777777777777")
+  
+  -- wooden blocks (7-10)
+  spr_data(7, "6666666666066066666666666666666666666666600660666666666666666666")
+  spr_data(8, "6666666666666666606666666666606666666666666660666066666666666666")
+  spr_data(9, "6060606066666666606060606666666660606060666666666060606066666666")
+  spr_data(10, "6666666660606060666666666060606066666666606060606666666660606060")
+  
+  -- metal blocks (11-13)
+  spr_data(11, "9999999999999999999999999999999999999999999999999999999999999999")
+  spr_data(12, "9999999999aaa99999a9a99999aaa99999a9a99999aaa9999999999999999999")
+  spr_data(13, "9999999999999999999988999998999999989999998899999999999999999999")
+  
+  -- water tiles (14-15)
+  spr_data(14, "0000000000333300033333300333333003333330033333300033330000000000")
+  spr_data(15, "0000000000000000033333303333333333333333333333330333333000000000")
+  
+  -- explosive barrels (16-17)
+  spr_data(16, "0088880008888880888888888888888888822888888228888888888808888880")
+  spr_data(17, "0088880008888880888228888882288888888888888888888888888808888880")
+  
+  -- goal tile (18)
+  spr_data(18, "00bbbb000bbbbbb0bbdbbbdbbbbddbbbbbbddbbbbbbddbbbbbbdbbbdb0bbbbbb0")
+  
+  -- fire animation sprites (19-21)
+  spr_data(19, "0008000000890800089898000889880000888000008880000088800000080000")
+  spr_data(20, "0008000000898000089a9800088a880008888800008880000088800000080000")
+  spr_data(21, "0008000000898000089a9800088a88000888a000088a80000888800000880000")
+  
+  -- additional platform tiles (22-25)
+  spr_data(22, "7777777777777777777777777777777777777777777777777777777777777777")
+  spr_data(23, "9999999999999999999999999999999999999999999999999999999999999999")
+  spr_data(24, "6666666666666666666666666666666666666666666666666666666666666666")
+  spr_data(25, "5555555555555555555555555555555555555555555555555555555555555555")
+  
+  -- additional flammable tiles (26-29)
+  spr_data(26, "6666666666066666660666666606666666066666660666666606666666666666")
+  spr_data(27, "6666666666666666666666666606606666066066666666666666666666666666")
+  spr_data(28, "6666666660666606666666666066660666666666606666066666666660666606")
+  spr_data(29, "6660666666606666666066666660666666606666666066666660666666606666")
+  
+  -- burnt tiles (30-32)
+  spr_data(30, "0000000000000000000000000000000000000000000000000000000000000000")
+  spr_data(31, "0000000000111000001110000111100001111000111110001111100000000000")
+  spr_data(32, "0001000000111000001110000111100001111000111110000111000000100000")
+  
+  -- enemy sprites (35-37)
+  spr_data(35, "0033330003333330333333333333333303333330003333000033330000033000")
+  spr_data(36, "0022220002222220222222222222222202222220002222000022220000022000")
+  spr_data(37, "0099990009999990999999999999999909999990009999000099990000099000")
+  
+  -- set sprite flags (0=solid)
+  for i=4,13 do
+    fset(i, 0, true)  -- solid tile flag
+  end
+  
+  -- set flags for additional platform tiles
+  for i=22,25 do
+    fset(i, 0, true)  -- solid tile flag
+  end
+end
+
+function load_maps()
+  -- level 1 (tutorial)
+  local lvl1 = {
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,7,7,7,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18},
+    {4,4,4,4,0,0,0,7,7,7,7,7,0,0,0,4},
+    {5,5,5,5,0,0,0,0,0,0,0,0,0,4,4,5},
+    {6,6,6,6,4,4,4,4,4,4,4,4,4,5,5,6}
+  }
+  
+  -- level 2 (bridge)
+  local lvl2 = {
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,14,14,14,0,0,0,0,0,0},
+    {4,4,4,0,0,7,7,7,7,7,7,7,0,0,0,18},
+    {5,5,5,0,0,0,0,0,0,0,0,0,0,4,4,4},
+    {6,6,6,14,14,14,14,14,14,14,14,4,4,5,5,5},
+    {6,6,6,14,14,14,14,14,14,14,14,5,5,6,6,6}
+  }
+  
+  -- level 3 (explosive)
+  local lvl3 = {
+    {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,16,0,0,0,0,0,0,0,0,0,0,0,0,18,5},
+    {5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,8,8,8,8,8,8,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,16,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,7,7,7,7,7,7,7,7,7,7,7,7,7,7,5},
+    {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
+  }
+  
+  -- level 4 (temple)
+  local lvl4 = {
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,11,11,11,11,11,0,0,0,0,0,0,0},
+    {0,0,0,11,11,0,0,0,11,11,0,0,0,0,0,0},
+    {0,0,11,11,0,0,0,0,0,11,11,0,0,0,0,0},
+    {0,0,11,0,0,0,18,0,0,0,11,0,0,0,0,0},
+    {0,0,11,0,0,4,4,4,0,0,11,0,0,0,0,0},
+    {4,4,4,7,7,5,5,5,7,7,4,4,4,0,0,0},
+    {5,5,5,0,0,5,5,5,0,0,5,5,5,0,0,0},
+    {5,5,5,0,0,6,6,6,0,0,5,5,5,4,4,4},
+    {6,6,6,4,4,6,6,6,4,4,6,6,6,5,5,5}
+  }
+  
+  -- set the maps
+  set_map_data(0, 0, lvl1)
+  set_map_data(0, 16, lvl2)
+  set_map_data(0, 32, lvl3)
+  set_map_data(0, 48, lvl4)
+end
+
+function spr_data(n, hex)
+  -- convert hex string to sprite data and load it into sprite n-1
+  local addr = (n-1) * 64
+  for i=1,64 do
+    local digit = sub(hex, i, i)
+    local val = 0
+    if digit == "0" then val = 0
+    elseif digit == "1" then val = 1
+    elseif digit == "2" then val = 2
+    elseif digit == "3" then val = 3
+    elseif digit == "4" then val = 4
+    elseif digit == "5" then val = 5
+    elseif digit == "6" then val = 6
+    elseif digit == "7" then val = 7
+    elseif digit == "8" then val = 8
+    elseif digit == "9" then val = 9
+    elseif digit == "a" then val = 10
+    elseif digit == "b" then val = 11
+    elseif digit == "c" then val = 12
+    elseif digit == "d" then val = 13
+    elseif digit == "e" then val = 14
+    elseif digit == "f" then val = 15
+    end
+    poke(addr + i - 1, val)
+  end
+end
+
+function set_map_data(x, y, map_data)
+  -- set map data starting at position x,y
+  for j=1,#map_data do
+    for i=1,#map_data[j] do
+      mset(x+i-1, y+j-1, map_data[j][i])
+    end
+  end
 end
 
 function init_level(lvl)
@@ -111,25 +308,11 @@ function init_level(lvl)
 end
 
 function load_level(lvl)
-  local mapx = 0
-  local mapy = 0
+  -- no need to reload map data since it's already set
+  -- in the load_maps function
   
-  if lvl == 1 then
-    -- tutorial level
-    mapx, mapy = 0, 0
-  elseif lvl == 2 then
-    -- bridge level
-    mapx, mapy = 0, 16
-  elseif lvl == 3 then
-    -- explosive level
-    mapx, mapy = 0, 32
-  elseif lvl == 4 then
-    -- temple level
-    mapx, mapy = 0, 48
-  end
-  
-  reload(0x2000, 0x2000, 0x1000)
-  memcpy(0x1000, 0x2000+mapx*128+mapy*8, 0x1000)
+  -- just make sure sprite flags are set correctly
+  init_sprites()
 end
 
 function init_enemies(lvl)
@@ -587,9 +770,9 @@ function draw_game()
   
   -- draw enemies
   for e in all(enemies) do
-    local sprite = 32
-    if e.type == 2 then sprite = 33 end
-    if e.type == 3 then sprite = 34 end
+    local sprite = 35
+    if e.type == 2 then sprite = 36 end
+    if e.type == 3 then sprite = 37 end
     
     spr(sprite, e.x, e.y, 1, 1, e.dx < 0)
   end
@@ -617,7 +800,7 @@ function draw_game()
   -- draw fires
   for f in all(fires) do
     local anim = flr(time() * 8) % 3
-    spr(16 + anim, f.x, f.y)
+    spr(19 + anim, f.x, f.y)
   end
   
   -- draw explosions
@@ -698,13 +881,11 @@ end
 -- initialize sprites
 function init_sprites()
   -- set collision flags (0=solid)
-  for i=1,10 do
-    -- solid tiles
+  for i=4,13 do
     fset(i, 0, true)
   end
   
-  for i=16,19 do
-    -- solid tiles
+  for i=22,25 do
     fset(i, 0, true)
   end
 end

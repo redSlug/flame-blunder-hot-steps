@@ -91,66 +91,66 @@ function _init()
 end
 
 function load_sprites()
-  -- player idle sprite (1)
-  spr_data(1, "0077770000777700077777700777777007700770077007700770077000700700")
-  -- player jump sprite (2)
-  spr_data(2, "0077770000777700077777700777777007700770077007700077770000077000")
-  -- player fall sprite (3)
-  spr_data(3, "0077770000777700077777700777777007700770077007700077770000700700")
+  -- player idle sprite (1) - Nintendo-style hero
+  spr_data(1, "0077770000ffff000ffaaff00ffaafff0ff00ff00ff00ff00ff00ff007f00f70")
+  -- player jump sprite (2) - dynamic jumping pose
+  spr_data(2, "0077770000ffff000ffaaff00ffaafff0ff00ff00ff00ff000ffff0000ff000")
+  -- player fall sprite (3) - falling pose
+  spr_data(3, "0077770000ffff000ffaaff00ffaafff0ff00ff00ff00ff00ff00ff00f700f7")
   
-  -- stone blocks (4-6)
-  spr_data(4, "7777777777777777777777777777777777777777777777777777777777777777")
-  spr_data(5, "7777777775557777757575777555577775757577755557777777777777777777")
-  spr_data(6, "7777777777777777777766777776777777767777776677777777777777777777")
+  -- stone blocks (4-6) - detailed Nintendo-style blocks
+  spr_data(4, "7777777778888887788888877888888778888887788888877888888777777777")
+  spr_data(5, "7777777778555887785758877855587778575877785558777888888777777777")
+  spr_data(6, "7777777778888887788876877887788778877887788768877888888777777777")
   
-  -- wooden blocks (7-10)
-  spr_data(7, "6666666666066066666666666666666666666666600660666666666666666666")
+  -- wooden blocks (7-10) - wood texture like Super Mario Bros 3
+  spr_data(7, "6666666664066046660666666606666664066046666666666666666664066046")
   spr_data(8, "6666666666666666606666666666606666666666666660666066666666666666")
-  spr_data(9, "6060606066666666606060606666666660606060666666666060606066666666")
-  spr_data(10, "6666666660606060666666666060606066666666606060606666666660606060")
+  spr_data(9, "6460646066666666646064606666666664606460666666666460646066666666")
+  spr_data(10, "6666666660646060666666666064606066666666606460606666666660646060")
   
-  -- metal blocks (11-13)
-  spr_data(11, "9999999999999999999999999999999999999999999999999999999999999999")
-  spr_data(12, "9999999999aaa99999a9a99999aaa99999a9a99999aaa9999999999999999999")
-  spr_data(13, "9999999999999999999988999998999999989999998899999999999999999999")
+  -- metal blocks (11-13) - shiny metal like Metroid
+  spr_data(11, "999999999abbbba99abbbba99abbbba99abbbba99abbbba99abbbba9999999999")
+  spr_data(12, "999999999aaaaa999a9a9a999aaaaa999a9a9a999aaaaa99999999999999999")
+  spr_data(13, "999999999999999999bb88b999bb88b999bb88b999bb88b99999999999999999")
   
-  -- water tiles (14-15)
-  spr_data(14, "0000000000333300033333300333333003333330033333300033330000000000")
-  spr_data(15, "0000000000000000033333303333333333333333333333330333333000000000")
+  -- water tiles (14-15) - animated water like Zelda
+  spr_data(14, "00000000003bbb00033bbb3003bbbb3003bbbb300333bb300033330000000000")
+  spr_data(15, "0000000000000000033bb3303bbbbbb333bbbb33333333330333333000000000")
   
-  -- explosive barrels (16-17)
-  spr_data(16, "0088880008888880888888888888888888822888888228888888888808888880")
-  spr_data(17, "0088880008888880888228888882288888888888888888888888888808888880")
+  -- explosive barrels (16-17) - Donkey Kong-style barrels
+  spr_data(16, "00888800088aa8808888888888888888888cc8888888cc8888888888088aa880")
+  spr_data(17, "00888800088aa8808888cc888882cc8888888888888888888888888808aa8880")
   
-  -- goal tile (18)
-  spr_data(18, "00bbbb000bbbbbb0bbdbbbdbbbbddbbbbbbddbbbbbbddbbbbbbdbbbdb0bbbbbb0")
+  -- goal tile (18) - shiny Nintendo-style door
+  spr_data(18, "00bbbb000bbbdbb0bbbddbbbbbbddbbbbdbddbbbbdbddbbbbbbdbbdb0bbbbbb0")
   
-  -- fire animation sprites (19-21)
-  spr_data(19, "0008000000890800089898000889880000888000008880000088800000080000")
-  spr_data(20, "0008000000898000089a9800088a880008888800008880000088800000080000")
-  spr_data(21, "0008000000898000089a9800088a88000888a000088a80000888800000880000")
+  -- fire animation sprites (19-21) - dynamic fire like Mario fireballs
+  spr_data(19, "000800000089080008a8a80008a8a80000a8a000008a80000088800000080000")
+  spr_data(20, "000800000089800008a9a80008aa880008aaa80000aaa0000088a00000080000")
+  spr_data(21, "000800000089a00008aaa8000aaaa8000a8aa00008aa80000888800000880000")
   
-  -- additional platform tiles (22-25)
-  spr_data(22, "7777777777777777777777777777777777777777777777777777777777777777")
-  spr_data(23, "9999999999999999999999999999999999999999999999999999999999999999")
-  spr_data(24, "6666666666666666666666666666666666666666666666666666666666666666")
-  spr_data(25, "5555555555555555555555555555555555555555555555555555555555555555")
+  -- additional platform tiles (22-25) - more detailed platforms
+  spr_data(22, "8888888878888887788888877888888778888887788888877888888788888888")
+  spr_data(23, "99999999abbbbbba9abbbba99abbbba99abbbba99abbbba9abbbbbba99999999")
+  spr_data(24, "6666666664666646646666466466664664666646646666466466664666666666")
+  spr_data(25, "5555555556555655565556555655565556555655565556555655565555555555")
   
-  -- additional flammable tiles (26-29)
-  spr_data(26, "6666666666066666660666666606666666066666660666666606666666666666")
+  -- additional flammable tiles (26-29) - Mario-style breakable blocks
+  spr_data(26, "6466666664066666640666666406666664066666640666666406666666666466")
   spr_data(27, "6666666666666666666666666606606666066066666666666666666666666666")
   spr_data(28, "6666666660666606666666666066660666666666606666066666666660666606")
   spr_data(29, "6660666666606666666066666660666666606666666066666660666666606666")
   
-  -- burnt tiles (30-32)
-  spr_data(30, "0000000000000000000000000000000000000000000000000000000000000000")
+  -- burnt tiles (30-32) - charred like after bomb explosions
+  spr_data(30, "0000000000000000001100000011100000111000001110000001100000000000")
   spr_data(31, "0000000000111000001110000111100001111000111110001111100000000000")
   spr_data(32, "0001000000111000001110000111100001111000111110000111000000100000")
   
-  -- enemy sprites (35-37)
-  spr_data(35, "0033330003333330333333333333333303333330003333000033330000033000")
-  spr_data(36, "0022220002222220222222222222222202222220002222000022220000022000")
-  spr_data(37, "0099990009999990999999999999999909999990009999000099990000099000")
+  -- enemy sprites (35-37) - Nintendo-style enemies
+  spr_data(35, "0033330003bbbb303bbbbbb33bbbbbb303bbbb30003333000033330000033000") -- Goomba-like
+  spr_data(36, "0022220002aaaa202aaaaaa22aaaaaa22a2222a2022222000022220000022000") -- Angry like Hammer Bro
+  spr_data(37, "0099990009aaaa909aaaaaa99aaaaaa90a9999a0009999000099990000099000") -- Koopa-like
   
   -- set sprite flags (0=solid)
   for i=4,13 do
@@ -164,7 +164,7 @@ function load_sprites()
 end
 
 function load_maps()
-  -- level 1 (tutorial)
+  -- level 1 (tutorial) - Super Mario Bros style intro level
   local lvl1 = {
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -174,9 +174,9 @@ function load_maps()
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,0,0,0,26,0,0,0,0,0,7,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,7,7,7,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18},
     {4,4,4,4,0,0,0,7,7,7,7,7,0,0,0,4},
@@ -184,7 +184,7 @@ function load_maps()
     {6,6,6,6,4,4,4,4,4,4,4,4,4,5,5,6}
   }
   
-  -- level 2 (bridge)
+  -- level 2 (bridge) - Zelda-like bridge with obstacles
   local lvl2 = {
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -197,37 +197,35 @@ function load_maps()
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,14,14,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,14,14,14,0,0,0,0,0,0},
+    {0,0,0,0,0,0,7,14,14,14,0,0,0,0,0,0},
     {4,4,4,0,0,7,7,7,7,7,7,7,0,0,0,18},
     {5,5,5,0,0,0,0,0,0,0,0,0,0,4,4,4},
     {6,6,6,14,14,14,14,14,14,14,14,4,4,5,5,5},
     {6,6,6,14,14,14,14,14,14,14,14,5,5,6,6,6}
   }
   
-  -- level 3 (explosive)
+  -- level 3 (explosive) - Bomberman/Zelda-style puzzle room
   local lvl3 = {
     {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,7,0,7,0,7,0,7,0,7,0,7,0,0,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,16,0,0,0,0,0,0,0,0,0,0,0,0,18,5},
+    {5,16,0,0,0,7,0,7,0,7,0,0,0,0,18,5},
     {5,5,4,4,4,4,4,4,4,4,4,4,4,4,4,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+    {5,0,0,0,7,0,0,0,0,0,0,7,0,0,0,5},
+    {5,0,0,0,0,0,0,7,0,0,0,0,0,0,0,5},
     {5,0,0,0,0,8,8,8,8,8,8,0,0,0,0,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-    {5,0,0,0,0,0,0,0,16,0,0,0,0,0,0,5},
+    {5,0,0,0,0,7,0,0,16,0,0,7,0,0,0,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
     {5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
     {5,7,7,7,7,7,7,7,7,7,7,7,7,7,7,5},
     {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}
   }
   
-  -- level 4 (temple)
+  -- level 4 (temple) - Metroid/Zelda-like temple sanctuary
   local lvl4 = {
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -236,6 +234,8 @@ function load_maps()
     {0,0,0,0,11,11,11,11,11,0,0,0,0,0,0,0},
     {0,0,0,11,11,0,0,0,11,11,0,0,0,0,0,0},
     {0,0,11,11,0,0,0,0,0,11,11,0,0,0,0,0},
+    {0,0,11,0,0,7,0,7,0,0,11,0,0,0,0,0},
+    {0,0,11,0,0,0,0,0,0,0,11,0,0,0,0,0},
     {0,0,11,0,0,0,18,0,0,0,11,0,0,0,0,0},
     {0,0,11,0,0,4,4,4,0,0,11,0,0,0,0,0},
     {4,4,4,7,7,5,5,5,7,7,4,4,4,0,0,0},
@@ -604,7 +604,7 @@ function create_explosion(x, y, size)
       end
     end
   end
-}
+end
 
 function update_enemies()
   for e in all(enemies) do
@@ -750,16 +750,36 @@ end
 function draw_menu()
   cls(0)
   
-  print("flame blunder: hot steps", 20, 40, 7)
-  print("your fire breath curse", 28, 50, 6)
-  print("keeps causing problems!", 24, 58, 6)
+  -- Nintendo-style title screen with logo
+  -- Draw colorful logo background
+  rectfill(20, 30, 108, 60, 2)
+  rectfill(22, 32, 106, 58, 8)
   
-  print("controls:", 40, 75, 7)
-  print("arrows: move", 36, 85, 6)
-  print("z/c: jump (causes fire!)", 16, 93, 8)
-  print("x/v: hold breath", 28, 101, 6)
+  -- Title text
+  print("flame blunder", 30, 40, 7)
+  print("hot steps", 40, 48, 10)
   
-  print("press x/v to start", 30, 116, 7 + (sin(time()) * 2))
+  -- Nintendo-style frame
+  rectfill(24, 70, 104, 110, 5)
+  rectfill(26, 72, 102, 108, 0)
+  
+  print("your fire breath curse", 28, 75, 7)
+  print("keeps causing problems!", 24, 83, 7)
+  
+  print("controls:", 40, 93, 10)
+  print("arrows: move", 36, 100, 7)
+  
+  -- Blinking "Press start" text like Nintendo games
+  if (time()*2) % 2 < 1 then
+    print("press x/v to start", 30, 116, 10)
+  end
+  
+  -- Animated fire at the corners
+  local anim = flr(time() * 8) % 3
+  spr(19 + anim, 16, 40)
+  spr(19 + anim, 104, 40)
+  spr(19 + anim, 16, 116)
+  spr(19 + anim, 104, 116)
 end
 
 function draw_game()
@@ -777,25 +797,48 @@ function draw_game()
     spr(sprite, e.x, e.y, 1, 1, e.dx < 0)
   end
   
-  -- draw player
+  -- draw player with Nintendo-style animation
   local sprite = p.spr_idle
   if not p.grounded then
     if p.dy < 0 then
-      sprite = p.spr_jump
+      sprite = p.spr_jump  -- jump sprite
     else
-      sprite = p.spr_fall
+      sprite = p.spr_fall  -- falling sprite
+    end
+  else
+    -- walking animation when moving on ground (like Mario)
+    if abs(p.dx) > 0.5 then
+      -- alternate between sprites for walk cycle
+      if (time()*8) % 2 < 1 then
+        sprite = p.spr_idle
+      else
+        sprite = p.spr_fall  -- use fall sprite as walk frame
+      end
     end
   end
   
   spr(sprite, p.x, p.y, 1, 1, p.flip)
   
-  -- draw hold breath indicator
-  if p.hold_breath then
-    pset(p.x + 4, p.y - 2, 12)
+  -- draw fire effect behind player when breathing fire
+  if p.cool_down > 0 and not p.hold_breath then
+    for i=1,2 do
+      local fx = p.x + (p.flip and -4 or 8)
+      local fy = p.y + 4 + rnd(2) - 1
+      local anim = flr(time() * 16) % 3
+      spr(19 + anim, fx, fy, 1, 1, p.flip)
+    end
   end
   
-  -- draw breath meter
-  rectfill(p.x, p.y - 4, p.x + p.breath_meter/10, p.y - 3, 12)
+  -- draw hold breath indicator (Mario-style power meter)
+  if p.hold_breath then
+    rectfill(p.x, p.y - 5, p.x + 8, p.y - 3, 1)
+    pset(p.x + 4, p.y - 4, 12)
+  end
+  
+  -- draw breath meter (like Zelda hearts)
+  local meter_width = p.breath_meter/10
+  rectfill(cam.x + 10, cam.y + 10, cam.x + 10 + meter_width, cam.y + 12, 8)
+  rect(cam.x + 10, cam.y + 10, cam.x + 110, cam.y + 12, 7)
   
   -- draw fires
   for f in all(fires) do
@@ -808,24 +851,56 @@ function draw_game()
     circfill(e.x, e.y, e.r, e.c)
   end
   
-  -- level indicator
-  print("level " .. level, cam.x + 2, cam.y + 2, 7)
+  -- level indicator - Nintendo-style level display
+  rectfill(cam.x + 2, cam.y + 2, cam.x + 40, cam.y + 9, 0)
+  print("world " .. level, cam.x + 4, cam.y + 3, 7)
 end
 
 function draw_gameover()
   cls(0)
+  
+  -- Game Over text in Nintendo style
+  for i=0,5 do
+    print("game over!", 45+i, 50, 1)
+    print("game over!", 45, 50+i, 1)
+  end
   print("game over!", 45, 50, 8)
-  print("you burned too much!", 30, 64, 8)
-  print("press x/v to retry", 30, 90, 7 + (sin(time()) * 2))
+  
+  print("you burned too much!", 30, 64, 7)
+  
+  -- Nintendo-style continue option
+  if (time()*2) % 2 < 1 then
+    print("press x/v to retry", 30, 90, 7)
+  end
+  
+  -- Draw sad player
+  spr(1, 60, 76)
 end
 
 function draw_win()
-  cls(0)
-  print("you win!", 48, 40, 11)
-  print("you've found the legendary", 15, 55, 7)
+  cls(1) -- Blue background like Mario
+  
+  -- Nintendo-style victory screen
+  -- Center frame
+  rectfill(15, 30, 113, 110, 5)
+  rectfill(17, 32, 111, 108, 0)
+  
+  -- Congratulations text with drop shadow
+  print("you win!", 49, 40, 0)
+  print("you win!", 48, 40, 10)
+  
+  print("you've found the legendary", 16, 55, 7)
   print("mouth guard artifact!", 25, 63, 7)
   print("no more fire troubles!", 25, 78, 11)
-  print("press x/v to play again", 18, 100, 7 + (sin(time()) * 2))
+  
+  -- Nintendo-style "Game Over" animation
+  if (time()*2) % 2 < 1 then
+    print("press x/v to play again", 18, 100, 10)
+  end
+  
+  -- Draw trophy-like item
+  spr(18, 56, 86)
+  spr(18, 64, 86)
 end
 
 -- helper functions
